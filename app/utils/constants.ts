@@ -86,10 +86,27 @@ async function getOpenAILikeModels(): Promise<ModelInfo[]> {
  }
 
 }
+
+async function getLMStudioModels(): Promise<ModelInfo[]> {
+  try {
+    const base_url = import.meta.env.LMSTUDIO_API_BASE_URL || "http://127.0.0.1:1234";
+    const response = await fetch(`${base_url}/v1/models`);
+    const data = await response.json() as any;
+    return data.data.map((model: any) => ({
+      name: model.id,
+      label: model.id,
+      provider: 'LMStudio',
+    }));
+  } catch (e) {
+    return [];
+  }
+}
+
 async function initializeModelList(): Promise<void> {
   const ollamaModels = await getOllamaModels();
   const openAiLikeModels = await getOpenAILikeModels();
-  MODEL_LIST = [...ollamaModels,...openAiLikeModels, ...staticModels];
+  const lmstudioModels = await getLMStudioModels();
+  MODEL_LIST = [...ollamaModels,...lmstudioModels,...openAiLikeModels, ...staticModels];
 }
 initializeModelList().then();
-export { getOllamaModels, getOpenAILikeModels, initializeModelList };
+export { getOllamaModels,getLMStudioModels,getOpenAILikeModels, initializeModelList };

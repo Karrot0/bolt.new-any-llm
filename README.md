@@ -22,7 +22,7 @@ This fork of Bolt.new allows you to choose the LLM that you use for each prompt!
 - ⬜ **HIGH PRIORITY** - Better prompting for smaller LLMs (code window sometimes doesn't start)
 - ⬜ **HIGH PRIORITY** - Attach images to prompts
 - ⬜ **HIGH PRIORITY** - Run agents in the backend as opposed to a single model call
-- ⬜ LM Studio Integration
+- ✅ LM Studio Integration (@Karrot0)
 - ⬜ Together Integration
 - ⬜ Azure Open AI API Integration
 - ⬜ HuggingFace Integration

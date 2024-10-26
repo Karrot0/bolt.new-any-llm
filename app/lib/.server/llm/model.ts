@@ -63,6 +63,13 @@ export function getOllamaModel(baseURL: string, model: string) {
   return Ollama;
 }
 
+export function getLMStudioModel(baseURL: string, model: string) {
+  const openai = createOpenAI({
+    baseURL: `${baseURL}/v1`,
+  });
+  return openai(model);
+}
+
 export function getDeepseekModel(apiKey: string, model: string){
   const openai = createOpenAI({
     baseURL: 'https://api.deepseek.com/beta',
@@ -100,7 +107,9 @@ export function getModel(provider: string, model: string, env: Env) {
     case 'Deepseek':
       return getDeepseekModel(apiKey, model)
     case 'Mistral':
-      return  getMistralModel(apiKey, model);
+      return getMistralModel(apiKey, model);
+    case 'LMStudio':
+      return getLMStudioModel(baseURL, model);
     default:
       return getOllamaModel(baseURL, model);
   }
